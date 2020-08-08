@@ -147,11 +147,10 @@ void setBackLight(boolean mBool)
 
 void setRtc()
 {
-  for (int k = 0; k < 7; k++)
-  {
-    Wire.beginTransmission(DEV_ADDR_RTC);
-    Wire.write(k);  // Set base register address to 0h (Seconds)
-    Wire.write((nArr[k] / 10 * 16) + (nArr[k] % 10)); // Decimal to Hexadecimal (BCD)
-    Wire.endTransmission();
-  }
+  Wire.beginTransmission(DEV_ADDR_RTC);
+  Wire.write(0);  // Set base register address to 0h (Seconds)
+    for (int k = 0; k < 7; k++)
+      Wire.write((nArr[k] / 10 * 16) + (nArr[k] % 10)); // Decimal to Hexadecimal (BCD)
+
+  Wire.endTransmission();
 }
